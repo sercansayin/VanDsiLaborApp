@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace VanDsi.Core
+﻿namespace VanDsi.Core.Models
 {
-    public class Personnel:BaseEntity
+    public class Employee:BaseEntity
     {
         public string TcNo { get; set; }
         public string SocialSecurityNumber { get; set; }
