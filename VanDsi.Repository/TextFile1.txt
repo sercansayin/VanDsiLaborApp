@@ -1,0 +1,4 @@
+﻿Repository katmanı için kullanmamız gereken kütüphaneler
+1. M. EntityFrameworkCore
+2. M. EntityFrameworkCore.SqlServer
+3. M. EntityFrameworkCore.Tools  => packge manager console kullanımı için gerekli kütüphane.
