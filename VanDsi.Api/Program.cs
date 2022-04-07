@@ -1,5 +1,8 @@
 using System.Reflection;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VanDsi.Api.Filters;
 using VanDsi.Core.Repositories;
 using VanDsi.Core.Services;
 using VanDsi.Core.UnitOfWorks;
@@ -8,12 +11,20 @@ using VanDsi.Repository.Repositories;
 using VanDsi.Repository.UnitOfWorks;
 using VanDsi.Service.Mapping;
 using VanDsi.Service.Services;
+using VanDsi.Service.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x =>x.RegisterValidatorsFromAssemblyContaining<EmployeeDtoValidator>());
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
