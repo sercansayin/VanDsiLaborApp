@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using VanDsi.Api.Filters;
 using VanDsi.Core.DTOs;
 using VanDsi.Core.Models;
 using VanDsi.Core.Repositories;
@@ -28,6 +29,7 @@ namespace VanDsi.Api.Controllers
             return CreateActionResult(CustomResponseDto<List<EmployeeDto>>.Success(200, employeesDtos));
         }
 
+        [ServiceFilter(typeof(NotFoundFilter<Employee>))]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {

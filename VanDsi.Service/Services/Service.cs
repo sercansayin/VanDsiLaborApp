@@ -2,7 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using VanDsi.Core.Repositories;
 using VanDsi.Core.Services;
-using VanDsi.Core.UnitOfWorks; 
+using VanDsi.Core.UnitOfWorks;
+using VanDsi.Service.Exceptions;
 
 namespace VanDsi.Service.Services
 {
@@ -19,7 +20,12 @@ namespace VanDsi.Service.Services
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id);
+            var hasEntity = await _repository.GetByIdAsync(id);
+
+            if (hasEntity == null)
+                throw new NotFoundException($"{typeof(T).Name}({id}) not found");
+
+            return hasEntity;
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
