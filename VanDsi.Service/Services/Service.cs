@@ -1,5 +1,5 @@
-﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 using VanDsi.Core.Repositories;
 using VanDsi.Core.Services;
 using VanDsi.Core.UnitOfWorks;
@@ -45,7 +45,7 @@ namespace VanDsi.Service.Services
         }
 
         public async Task<T> AddAsync(T entity)
-        { 
+        {
             await _repository.AddAsync(entity);
             await _unitOfWork.CommitAsync();
             return entity;

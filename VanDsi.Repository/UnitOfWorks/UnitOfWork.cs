@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VanDsi.Core.Repositories;
+﻿using VanDsi.Core.Repositories;
 using VanDsi.Core.UnitOfWorks;
 using VanDsi.Repository.Repositories;
 
 namespace VanDsi.Repository.UnitOfWorks
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly AppDbContext _context;
         private EmployeeRepository _employeeRepository;

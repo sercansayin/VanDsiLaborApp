@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using VanDsi.Core.Models;
 using VanDsi.Core.Repositories;
 
 namespace VanDsi.Repository.Repositories
 {
-    public class LaborRepository: GenericRepository<Labor>, ILaborRepository
+    public class LaborRepository : GenericRepository<Labor>, ILaborRepository
     {
         public LaborRepository(AppDbContext context) : base(context)
         {

@@ -1,24 +1,21 @@
-using System.Reflection;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using VanDsi.Api.Filters;
 using VanDsi.Api.Middlewares;
-using VanDsi.Core.Repositories;
-using VanDsi.Core.Services;
-using VanDsi.Core.UnitOfWorks;
+using VanDsi.Api.Modules;
 using VanDsi.Repository;
-using VanDsi.Repository.Repositories;
-using VanDsi.Repository.UnitOfWorks;
 using VanDsi.Service.Mapping;
-using VanDsi.Service.Services;
 using VanDsi.Service.Validations;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x =>x.RegisterValidatorsFromAssemblyContaining<EmployeeDtoValidator>());
+builder.Services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute())).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<EmployeeDtoValidator>());
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
@@ -30,12 +27,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IService<>), typeof(Service<>));
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddAutoMapper(typeof(MapProfile));    
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 builder.Services.AddDbContext<AppDbContext>(x =>
 {
@@ -45,6 +37,9 @@ builder.Services.AddDbContext<AppDbContext>(x =>
     });
 });
 
+builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
+builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
+    containerBuilder.RegisterModule(new RepoServiceModule()));
 
 var app = builder.Build();
 

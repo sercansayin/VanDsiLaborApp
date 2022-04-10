@@ -1,6 +1,6 @@
 ﻿namespace VanDsi.Core.Models
 {
-    public class Employee:BaseEntity
+    public class Employee : BaseEntity
     {
         public string TcNo { get; set; }
         public string SocialSecurityNumber { get; set; }

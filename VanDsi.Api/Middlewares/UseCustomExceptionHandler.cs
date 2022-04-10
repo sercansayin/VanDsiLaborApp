@@ -1,5 +1,5 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using System.Text.Json;
 using VanDsi.Core.DTOs;
 using VanDsi.Service.Exceptions;
 
@@ -18,7 +18,7 @@ namespace VanDsi.Api.Middlewares
                     var statusCode = exceptionFeature.Error switch
                     {
                         ClientSideException => 400,
-                        NotFoundException=>404,
+                        NotFoundException => 404,
                         _ => 500
                     };
                     context.Response.StatusCode = statusCode;

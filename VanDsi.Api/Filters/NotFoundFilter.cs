@@ -6,7 +6,7 @@ using VanDsi.Core.Services;
 
 namespace VanDsi.Api.Filters
 {
-    public class NotFoundFilter<T>:IAsyncActionFilter where T :BaseEntity
+    public class NotFoundFilter<T> : IAsyncActionFilter where T : BaseEntity
     {
         private readonly IService<T> _service;
 
@@ -30,7 +30,7 @@ namespace VanDsi.Api.Filters
                 await next.Invoke();
                 return;
             }
-            context.Result = new NotFoundObjectResult(CustomResponseDto<NoContentDto>.Fail(404,$"{typeof(T).Name}({id}) not Found"));
+            context.Result = new NotFoundObjectResult(CustomResponseDto<NoContentDto>.Fail(404, $"{typeof(T).Name}({id}) not Found"));
         }
     }
 }

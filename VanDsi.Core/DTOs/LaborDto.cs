@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VanDsi.Core.Models;
+﻿using VanDsi.Core.Models;
 
 namespace VanDsi.Core.DTOs
 {
-    public class LaborDto: BaseDto
+    public class LaborDto : BaseDto
     {
         public int EmployeeId { get; set; }
         public int UserId { get; set; }

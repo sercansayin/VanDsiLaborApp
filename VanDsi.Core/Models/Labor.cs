@@ -1,6 +1,6 @@
 ﻿namespace VanDsi.Core.Models
 {
-    public class Labor:BaseEntity
+    public class Labor : BaseEntity
     {
         public int EmployeeId { get; set; }
         public int UserId { get; set; }

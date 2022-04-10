@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using VanDsi.Core.Models;
+﻿using VanDsi.Core.Models;
 using VanDsi.Core.Repositories;
 using VanDsi.Core.Services;
 using VanDsi.Core.UnitOfWorks;
 
 namespace VanDsi.Service.Services
 {
-    public class EmployeeService:Service<Employee>,IEmployeeService
+    public class EmployeeService : Service<Employee>, IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository;
 
@@ -22,8 +16,8 @@ namespace VanDsi.Service.Services
 
         public override async Task UpdateAsync(Employee entity)
         {
-             _employeeRepository.Update(entity);
-             await _unitOfWork.CommitAsync();
+            _employeeRepository.Update(entity);
+            await _unitOfWork.CommitAsync();
         }
     }
 }
