@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using VanDsi.Api.Filters;
 using VanDsi.Api.Middlewares;
 using VanDsi.Api.Modules;
-using VanDsi.Api.Secyrity.Token;
 using VanDsi.Repository;
 using VanDsi.Service.Mapping;
+using VanDsi.Service.Security;
 using VanDsi.Service.Validations;
+using TokenOptions = VanDsi.Core.Models.Security.TokenOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new RepoServiceModule()));
 
 
+builder.Services.Configure<TokenOptions>(builder.Configuration.GetSection("TokenOptions"));
 
 var tokenOptions = builder.Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -53,9 +55,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = true,
         ValidateIssuer = true,
         ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
         ValidIssuer = tokenOptions.Issuer,
-        ValidAudience = tokenOptions.Audience
-        
+        ValidAudience = tokenOptions.Audience,
+        IssuerSigningKey = SignHandler.GetSecurityKey(tokenOptions.SecurityKey)
     };
 });
 

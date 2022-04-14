@@ -13,8 +13,8 @@ namespace VanDsi.Repository.Configurations
             builder.Property(x => x.CreateDate).HasColumnType("datetime");
             builder.Property(x => x.UpdateDate).HasColumnType("datetime");
             builder.Property(x => x.IsDelete).HasColumnType("bit");
-            builder.Property(x => x.RefleshToken).HasColumnType("nvarchar(100)");
-            builder.Property(x => x.RefleshTokenAndDate).HasColumnType("datetime");
+            builder.Property(x => x.RefreshToken).HasColumnType("nvarchar(100)");
+            builder.Property(x => x.RefreshTokenAndDate).HasColumnType("datetime");
         }
     }
 }

@@ -132,10 +132,10 @@ namespace VanDsi.Repository.Migrations
                     b.Property<string>("NameLastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RefleshToken")
+                    b.Property<string>("RefreshToken")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime?>("RefleshTokenAndDate")
+                    b.Property<DateTime?>("RefreshTokenAndDate")
                         .HasColumnType("datetime");
 
                     b.Property<DateTime?>("UpdateDate")

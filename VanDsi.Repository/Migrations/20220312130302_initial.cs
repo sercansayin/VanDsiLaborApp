@@ -18,8 +18,8 @@ namespace VanDsi.Repository.Migrations
                     UserPassword = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NameLastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
-                    RefleshToken = table.Column<string>(type: "nvarchar(100)", nullable: true),
-                    RefleshTokenAndDate = table.Column<DateTime>(type: "datetime", nullable: true),
+                    RefreshToken = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    RefreshTokenAndDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime", nullable: true)
                 },

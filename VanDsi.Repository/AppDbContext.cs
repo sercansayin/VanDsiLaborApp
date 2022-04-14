@@ -48,19 +48,33 @@ namespace VanDsi.Repository
                     switch (item.State)
                     {
                         case EntityState.Added:
-                        {
-                            entityReferance.CreateDate = DateTime.Now;
-                            break;
-                        }
+                            {
+                                entityReferance.CreateDate = DateTime.Now;
+                                break;
+                            }
                         case EntityState.Modified:
-                        {
-                            Entry(entityReferance).Property(x => x.CreateDate).IsModified = false;
-                            entityReferance.UpdateDate = DateTime.Now;
-                            break;
-                        }
+                            {
+                                Entry(entityReferance).Property(x => x.CreateDate).IsModified = false;
+                                entityReferance.UpdateDate = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+                if (item.Entity is Labor entityLabor)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Modified:
+                            {
+                                Entry(entityLabor).Property(x => x.EmployeeId).IsModified = false;
+                                Entry(entityLabor).Property(x => x.UserId).IsModified = false;
+                                break;
+                            }
                     }
                 }
             }
+
+
             //var entries = ChangeTracker.Entries().Where(e =>
             //    e.Entity is BaseEntity && e.State is EntityState.Added or EntityState.Modified);
 
