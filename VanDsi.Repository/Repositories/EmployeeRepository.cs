@@ -10,12 +10,5 @@ namespace VanDsi.Repository.Repositories
         public EmployeeRepository(AppDbContext context) : base(context)
         {
         }
-
-        public override void Update(Employee entity)
-        {
-            _context.Entry(entity).State = EntityState.Modified;
-            _context.Entry(entity).Property(x => x.CreateDate).IsModified = false;
-            _context.Employees.Update(entity);
-        }
     }
 }

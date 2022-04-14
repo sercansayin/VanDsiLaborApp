@@ -70,7 +70,7 @@ namespace VanDsi.Service.Services
             await _unitOfWork.CommitAsync();
         }
 
-        public virtual async Task UpdateAsync(T entity)
+        public async Task UpdateAsync(T entity)
         {
             _repository.Update(entity);
             await _unitOfWork.CommitAsync();

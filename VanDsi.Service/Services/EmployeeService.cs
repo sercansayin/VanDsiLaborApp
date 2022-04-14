@@ -13,11 +13,5 @@ namespace VanDsi.Service.Services
         {
             _employeeRepository = employeeRepository;
         }
-
-        public override async Task UpdateAsync(Employee entity)
-        {
-            _employeeRepository.Update(entity);
-            await _unitOfWork.CommitAsync();
-        }
     }
 }

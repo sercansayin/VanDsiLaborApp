@@ -56,7 +56,7 @@ namespace VanDsi.Repository.Repositories
             _dbSet.RemoveRange(entities);
         }
 
-        public virtual void Update(T entity)
+        public void Update(T entity)
         {
             _dbSet.Update(entity);
         }

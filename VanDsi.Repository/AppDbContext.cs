@@ -41,17 +41,37 @@ namespace VanDsi.Repository
 
         private void SetBaseEntity()
         {
-            var entries = ChangeTracker.Entries().Where(e =>
-                e.Entity is BaseEntity && e.State is EntityState.Added or EntityState.Modified);
-
-            foreach (var entityEntry in entries)
+            foreach (var item in ChangeTracker.Entries())
             {
-                ((BaseEntity)entityEntry.Entity).UpdateDate = DateTime.Now;
-                if (entityEntry.State == EntityState.Added)
+                if (item.Entity is BaseEntity entityReferance)
                 {
-                    ((BaseEntity)entityEntry.Entity).CreateDate = DateTime.Now;
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                        {
+                            entityReferance.CreateDate = DateTime.Now;
+                            break;
+                        }
+                        case EntityState.Modified:
+                        {
+                            Entry(entityReferance).Property(x => x.CreateDate).IsModified = false;
+                            entityReferance.UpdateDate = DateTime.Now;
+                            break;
+                        }
+                    }
                 }
             }
+            //var entries = ChangeTracker.Entries().Where(e =>
+            //    e.Entity is BaseEntity && e.State is EntityState.Added or EntityState.Modified);
+
+            //foreach (var entityEntry in entries)
+            //{
+            //    ((BaseEntity)entityEntry.Entity).UpdateDate = DateTime.Now;
+            //    if (entityEntry.State == EntityState.Added)
+            //    {
+            //        ((BaseEntity)entityEntry.Entity).CreateDate = DateTime.Now;
+            //    }
+            //}
         }
     }
 }
