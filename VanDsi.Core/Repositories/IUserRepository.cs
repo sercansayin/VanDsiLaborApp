@@ -10,7 +10,8 @@ namespace VanDsi.Core.Repositories
     public interface IUserRepository: IGenericRepository<User>
     {
         void AddUser(User user);
-        User GetUserByIdAsync(int id);
+        void UpdateUser(User user);
+        User GetUserById(int id);
         User GetUserByUserNameAndPassword(string userName, string password);
         void SaveRefreshToken(int id, string refreshToken);
         User GetUserWithRefreshTokenByRefreshToken(string refreshToken);

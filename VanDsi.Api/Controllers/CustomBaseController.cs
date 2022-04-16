@@ -3,6 +3,8 @@ using VanDsi.Core.DTOs;
 
 namespace VanDsi.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CustomBaseController : ControllerBase
     {
         [NonAction]

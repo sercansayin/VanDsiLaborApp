@@ -23,7 +23,12 @@ namespace VanDsi.Repository.Repositories
             _context.Users.Add(user);
         }
 
-        public User GetUserByIdAsync(int id)
+        public void UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+        }
+
+        public User GetUserById(int id)
         {
             return _context.Users.Find(id);
         }

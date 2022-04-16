@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using VanDsi.Core.DTOs;
 using VanDsi.Core.Repositories;
 using VanDsi.Core.Services;
 using VanDsi.Core.UnitOfWorks;
@@ -28,10 +29,10 @@ namespace VanDsi.Service.Services
             return hasEntity;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<CustomResponseDto<IEnumerable<T>>> GetAllAsync()
         {
-            return await _repository.GetAll().ToListAsync();
-
+            var tListAsync = await _repository.GetAll().ToListAsync();
+            return CustomResponseDto<IEnumerable<T>>.Success(200,tListAsync);
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> expression)
@@ -58,10 +59,11 @@ namespace VanDsi.Service.Services
             return entities;
         }
 
-        public async Task RemoveAsync(T entity)
+        public async Task<CustomResponseDto<NoContentDto>> RemoveAsync(T entity)
         {
             _repository.Remove(entity);
             await _unitOfWork.CommitAsync();
+            return CustomResponseDto<NoContentDto>.Success(204);
         }
 
         public async Task RemoveRangeAsync(IEnumerable<T> entities)

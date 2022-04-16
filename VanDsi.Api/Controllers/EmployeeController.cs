@@ -7,8 +7,6 @@ using VanDsi.Core.Services;
 
 namespace VanDsi.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class EmployeeController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -23,9 +21,7 @@ namespace VanDsi.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var employees = await _service.GetAllAsync();
-            var employeesDtos = _mapper.Map<List<EmployeeDto>>(employees.ToList());
-            return CreateActionResult(CustomResponseDto<List<EmployeeDto>>.Success(200, employeesDtos));
+            return CreateActionResult(await _service.GetAllAsync());
         }
 
         [ServiceFilter(typeof(NotFoundFilter<Employee>))]
