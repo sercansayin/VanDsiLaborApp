@@ -18,11 +18,11 @@ namespace VanDsi.Service.Services
             _mapper = mapper;
         }
 
-        public async Task<CustomResponseDto<List<LaborDto>>> GetLaborsForEmployeeId(int employeId)
+        public async Task<CustomResponseDto<List<LaborsForEmployeeDto>>> GetLaborsForEmployeeId(int employeId)
         {
             var laborList = await _laborRepository.GetLaborsForEmployeeId(employeId);
-            var laborDto = _mapper.Map<List<LaborDto>>(laborList);
-            return CustomResponseDto<List<LaborDto>>.Success(200, laborDto);
+            var LaborsForEmployeeDto = _mapper.Map<List<LaborsForEmployeeDto>>(laborList);
+            return CustomResponseDto<List<LaborsForEmployeeDto>>.Success(200, LaborsForEmployeeDto);
         }
 
     }

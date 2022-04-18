@@ -25,24 +25,6 @@ namespace VanDsi.Service.Services
             _mapper = mapper;
         }
 
-        public CustomResponseDto<UserDto> AddUser(UserDto userDto)
-        {
-            userDto.UserPassword = Encryption.UserPassword(userDto.UserPassword);
-            var user = _mapper.Map<User>(userDto);
-            _userRepository.AddUser(user);
-            _unitOfWork.Commit();
-            return CustomResponseDto<UserDto>.Success(201,_mapper.Map<UserDto>(user));
-        }
-
-        public CustomResponseDto<UserDto> UpdateUser(UserDto userDto)
-        {
-            userDto.UserPassword = Encryption.UserPassword(userDto.UserPassword);
-            var user = _mapper.Map<User>(userDto);
-            _userRepository.UpdateUser(user);
-            _unitOfWork.Commit();
-            return CustomResponseDto<UserDto>.Success(200,_mapper.Map<UserDto>(user));
-        }
-
         public CustomResponseDto<UserDto> GetUserById(int id)
         {
             var getUser = _userRepository.GetUserById(id);

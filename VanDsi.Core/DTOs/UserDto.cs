@@ -5,5 +5,6 @@
         public string UserName { get; set; }
         public string UserPassword { get; set; }
         public string NameLastName { get; set; }
+        public DateTime? RefreshTokenAndDate { get; set; }
     }
 }

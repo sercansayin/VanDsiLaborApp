@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using VanDsi.Api.Filters;
 using VanDsi.Core.DTOs;
@@ -7,6 +8,7 @@ using VanDsi.Core.Services;
 
 namespace VanDsi.Api.Controllers
 {
+    [Authorize]
     public class EmployeeController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -40,14 +42,7 @@ namespace VanDsi.Api.Controllers
             return CreateActionResult(CustomResponseDto<EmployeeDto>.Success(201, _mapper.Map<EmployeeDto>(employeeEntity)));
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> SaveRange(List<EmployeeDto> employeesDtos)
-        //{
-        //    var employeesEntityes = await _service.AddRangeAsync(_mapper.Map<List<Employee>>(employeesDtos));
-        //    var employeeList = _mapper.Map<List<EmployeeDto>>(employeesEntityes.ToList());
-        //    return CreateActionResult(CustomResponseDto<List<EmployeeDto>>.Success(200, employeeList));
-        //}
-
+        [ServiceFilter(typeof(NotFoundFilter<Employee>))]
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Remove(int id)
         {
@@ -55,11 +50,18 @@ namespace VanDsi.Api.Controllers
             await _service.RemoveAsync(employee);
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
         [HttpPut]
         public async Task<IActionResult> Update(EmployeeDto employeeDto)
         {
             await _service.UpdateAsync(_mapper.Map<Employee>(employeeDto));
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+        }
+        
+        [HttpGet ("[action]")]
+        public async Task<IActionResult> GetEmployeeAndLaborsByEmployeeId(int id)
+        {
+            return CreateActionResult(await _service.GetEmployeeAndLaborsByEmployeeId(id));
         }
     }
 }

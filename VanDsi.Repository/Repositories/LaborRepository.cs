@@ -12,7 +12,7 @@ namespace VanDsi.Repository.Repositories
 
         public async Task<List<Labor>> GetLaborsForEmployeeId(int employeId)
         {
-            return await _context.Labors.Include(x => x.EmployeeId == employeId).ToListAsync();
+            return await _context.Labors.Where(e =>e.EmployeeId==employeId).ToListAsync();
         }
     }
 }

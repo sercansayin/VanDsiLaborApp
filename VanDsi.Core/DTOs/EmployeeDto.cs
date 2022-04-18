@@ -1,4 +1,6 @@
-﻿namespace VanDsi.Core.DTOs
+﻿using VanDsi.Core.Models;
+
+namespace VanDsi.Core.DTOs
 {
     public class EmployeeDto : BaseDto
     {
@@ -10,5 +12,6 @@
         public string FatherName { get; set; }
         public string BirthPlace { get; set; }
         public string BirthDate { get; set; }
+        public ICollection<LaborDto> Labors { get; set; }
     }
 }

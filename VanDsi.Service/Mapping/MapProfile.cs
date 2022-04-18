@@ -10,6 +10,7 @@ namespace VanDsi.Service.Mapping
         {
             CreateMap<Employee, EmployeeDto>().ReverseMap();
             CreateMap<Labor, LaborDto>().ReverseMap();
+            CreateMap<Labor, LaborsForEmployeeDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
         }
     }

@@ -18,16 +18,6 @@ namespace VanDsi.Repository.Repositories
             _tokenOptions = tokenOptions.Value;
         }
 
-        public void AddUser(User user)
-        {
-            _context.Users.Add(user);
-        }
-
-        public void UpdateUser(User user)
-        {
-            _context.Users.Update(user);
-        }
-
         public User GetUserById(int id)
         {
             return _context.Users.Find(id);

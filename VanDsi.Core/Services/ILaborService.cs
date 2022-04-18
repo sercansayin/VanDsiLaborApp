@@ -5,6 +5,6 @@ namespace VanDsi.Core.Services
 {
     public interface ILaborService : IService<Labor>
     {
-        Task<CustomResponseDto<List<LaborDto>>> GetLaborsForEmployeeId(int employeId);
+        Task<CustomResponseDto<List<LaborsForEmployeeDto>>> GetLaborsForEmployeeId(int employeId);
     }
 }
