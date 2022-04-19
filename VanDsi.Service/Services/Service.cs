@@ -45,7 +45,7 @@ namespace VanDsi.Service.Services
             return await _repository.AnyAsync(expression);
         }
 
-        public async Task<T> AddAsync(T entity)
+        public virtual async Task<T> AddAsync(T entity)
         {
             await _repository.AddAsync(entity);
             await _unitOfWork.CommitAsync();

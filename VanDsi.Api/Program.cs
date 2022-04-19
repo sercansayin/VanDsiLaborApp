@@ -32,6 +32,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddScoped(typeof(DuplicateLaborControlFilter<>));
+builder.Services.AddScoped(typeof(LoginFilter<>));
 builder.Services.AddScoped<ITokenHandler, TokenHandler>();
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
@@ -63,7 +64,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateIssuerSigningKey = true,
         ValidIssuer = tokenOptions.Issuer,
         ValidAudience = tokenOptions.Audience,
-        IssuerSigningKey = SignHandler.GetSecurityKey(tokenOptions.SecurityKey)
+        IssuerSigningKey = SignHandler.GetSecurityKey(tokenOptions.SecurityKey),
+        ClockSkew = TimeSpan.Zero
     };
 });
 

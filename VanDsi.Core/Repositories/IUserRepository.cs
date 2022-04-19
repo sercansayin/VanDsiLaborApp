@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VanDsi.Core.DTOs;
 using VanDsi.Core.Models;
 
 namespace VanDsi.Core.Repositories
@@ -14,5 +15,6 @@ namespace VanDsi.Core.Repositories
         void SaveRefreshToken(int id, string refreshToken);
         User GetUserWithRefreshTokenByRefreshToken(string refreshToken);
         void RemoveRefreshToken(User user);
+        bool AnyUser(string userName, string password);
     }
 }

@@ -8,12 +8,11 @@ using VanDsi.Core.Services;
 
 namespace VanDsi.Api.Controllers
 {
-   
+    [Authorize]
     public class LaborController : CustomBaseController
     {
         private readonly ILaborService _laborService;
         private readonly IMapper _mapper;
-
 
         public LaborController(ILaborService laborService, IMapper mapper)
         {

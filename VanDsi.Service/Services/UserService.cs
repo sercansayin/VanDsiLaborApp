@@ -59,5 +59,17 @@ namespace VanDsi.Service.Services
             _userRepository.RemoveRefreshToken(user);
             _unitOfWork.Commit();
         }
+
+        public bool AnyUser(LoginDto loginDto)
+        {
+            var password = Encryption.UserPassword(loginDto.Password);
+            return _userRepository.AnyUser(loginDto.UserName,password);
+        }
+
+        public override Task<User> AddAsync(User entity)
+        {
+            entity.UserPassword = Encryption.UserPassword(entity.UserPassword);
+            return base.AddAsync(entity);
+        }
     }
 }

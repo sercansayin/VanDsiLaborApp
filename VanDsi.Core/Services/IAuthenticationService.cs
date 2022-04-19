@@ -12,6 +12,6 @@ namespace VanDsi.Core.Services
     {
         CustomResponseDto<AccessToken> CreateAccessToken(string userName, string password);
         CustomResponseDto<AccessToken> CreateAccessTokenByRefreshToken(string refreshToken);
-        CustomResponseDto<NoContentDto> RevokeRefreshToken(string refreshToken);
+        CustomResponseDto<NoContentDto> RemoveRefreshToken(string refreshToken);
     }
 }

@@ -15,5 +15,6 @@ namespace VanDsi.Core.Services
         void SaveRefreshToken(int id, string refreshToken);
         CustomResponseDto<UserDto> GetUserWithRefreshTokenByRefreshToken(string refreshToken);
         void RemoveRefreshToken(UserDto userDto);
+        bool AnyUser(LoginDto loginDto);
     }
 }

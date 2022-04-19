@@ -31,8 +31,10 @@ namespace VanDsi.Service.Services
             var userDto = _userService.GetUserByUserNameAndPassword(userName,password);
             if (userDto.StatusCode == 200)
             {
-                var user = _mapper.Map<User>(userDto);
+                var user = _mapper.Map<User>(userDto.Data);
                 var accessToken = _tokenHandler.createAccessToken(user);
+
+                _userService.SaveRefreshToken(user.Id,accessToken.RefreshToken);
                 return CustomResponseDto<AccessToken>.Success(200,accessToken);
             }
             else
@@ -47,10 +49,11 @@ namespace VanDsi.Service.Services
 
             if (userDto.StatusCode == 200)
             {
-                if (userDto.Data.RefreshTokenAndDate < DateTime.Now)
+                if (userDto.Data.RefreshTokenAndDate > DateTime.Now)
                 {
                     var user = _mapper.Map<User>(userDto.Data);
                     var accessToken = _tokenHandler.createAccessToken(user);
+                    _userService.SaveRefreshToken(user.Id, accessToken.RefreshToken);
                     return CustomResponseDto<AccessToken>.Success(200, accessToken);
                 }
                 else
@@ -64,7 +67,7 @@ namespace VanDsi.Service.Services
             }
         }
 
-        public CustomResponseDto<NoContentDto> RevokeRefreshToken(string refreshToken)
+        public CustomResponseDto<NoContentDto> RemoveRefreshToken(string refreshToken)
         {
             var userDto = _userService.GetUserWithRefreshTokenByRefreshToken(refreshToken);
 

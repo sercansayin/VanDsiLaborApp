@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
+using VanDsi.Core.DTOs;
 using VanDsi.Core.Models;
 using VanDsi.Core.Models.Security;
 using VanDsi.Core.Repositories;
@@ -44,6 +45,12 @@ namespace VanDsi.Repository.Repositories
         {
             var newUser = _context.Users.Find(user.Id);
             newUser.RefreshToken = null;
+            newUser.RefreshTokenAndDate = null;
+        }
+
+        public bool AnyUser(string userName, string password)
+        {
+            return _context.Users.Any(u => u.UserName == userName && u.UserPassword == password);
         }
     }
 }

@@ -42,8 +42,7 @@ namespace VanDsi.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAsync(UserDto userDto)
         {
-            var userEntity = _mapper.Map<User>(userDto);
-            await _userService.AddAsync(userEntity);
+            var userEntity = await _userService.AddAsync(_mapper.Map<User>(userDto));
             return CreateActionResult(CustomResponseDto<UserDto>.Success(204, _mapper.Map<UserDto>(userEntity)));
         }
 
