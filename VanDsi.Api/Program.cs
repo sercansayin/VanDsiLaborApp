@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Newtonsoft.Json;
 using VanDsi.Api.Filters;
 using VanDsi.Api.Middlewares;
 using VanDsi.Api.Modules;
